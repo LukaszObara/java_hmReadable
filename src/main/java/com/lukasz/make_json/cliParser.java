@@ -24,7 +24,7 @@ public class cliParser {
     }
 
 
-    public static void generateCommandLine(final Options options, final String[] args){
+    public static CommandLine generateCommandLine(final Options options, final String[] args){
         final CommandLineParser parser = new DefaultParser();
         final HelpFormatter formatter = new HelpFormatter();
         CommandLine cmd = null;
@@ -35,5 +35,7 @@ public class cliParser {
             System.err.println(e.getMessage());
             formatter.printHelp("utility-name", options);
         }
+
+        return cmd;
     } 
 }
