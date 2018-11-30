@@ -1,27 +1,20 @@
 package com.lukasz.make_json;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-// import java.io.FileNotFoundException;
-// import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-// import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-// import java.util.stream.Stream;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
-// import org.apache.commons.io.FileUtils;
-// import org.apache.commons.cli.Parser;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 
 public class App {
@@ -38,13 +31,15 @@ public class App {
 
     public static String parseJson(String loc) throws IOException {
         InputStream file = new FileInputStream(new File(loc));
-        BufferedReader bufferReader = new BufferedReader(new InputStreamReader(file));
-        String data = bufferReader.lines()
-            .collect(Collectors.joining("\n"));
+        // BufferedReader bufferReader = new BufferedReader(new InputStreamReader(file));
+        // String data = bufferReader.lines()
+        //     .collect(Collectors.joining("\n"));
 
-        JSONObject jsonObject = new JSONObject(data);
+        // JSONObject jsonObject = new JSONObject(data);
+        // bufferReader.close();
+        JSONObject jsonObject = new JSONObject(new JSONTokener(file));
+        file.close();
 
-        bufferReader.close();
         return jsonObject.toString(4);
     }
 
